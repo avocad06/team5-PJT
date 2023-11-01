@@ -38,11 +38,11 @@ function RainbowLogo() {
   
   function getDesiredColor(char) {
     if (char === 'M' || char === 'O' || char === 'Y' || char === 'O' || char === 'U') {
-      return '#5D2A0C'; // MO, YOU 문자에 원하는 색상 적용
+      return '#5D2A0C'; 
     } else if (char === 'H' || char === 'E') {
-      return '#80BE26'; // HE 문자에 원하는 색상 적용
+      return '#80BE26';
     } else {
-      return 'black'; // 기본 색상
+      return 'black'; 
     }
   }
   
