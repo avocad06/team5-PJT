@@ -8,6 +8,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import RainbowLogo from './components/Logo'
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/result",
-    element: <>결과 페이지입니다.</>,
+    element: <RainbowLogo/>,
   },
 ]);
 
