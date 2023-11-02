@@ -9,6 +9,7 @@ import { createGlobalStyle } from "styled-components";
 import { Global } from "@emotion/react";
 import RainbowLogo from './components/Logo'
 import RetestButton from "./components/Button_retest";
+import Result from './pages/Result'
 
 const GlobalStyle = createGlobalStyle`
 :root {
@@ -30,7 +31,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/result",
-    element: <><RainbowLogo/>, <RetestButton/></>
+    element: <Result />,
+  
   },
 ]);
 

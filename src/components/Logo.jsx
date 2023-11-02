@@ -15,8 +15,7 @@ const RainbowText = styled.span`
 `;
 
 function RainbowLogo() {
-    const text = "MOHEYOU";
-  
+  const text = "MOHEYOU";
     return (
       <LogoContainer>
         {text.split('').map((char, index) => (
@@ -35,15 +34,15 @@ function RainbowLogo() {
       </div>
     );
   }
-  
+
   function getDesiredColor(char) {
     if (char === 'M' || char === 'O' || char === 'Y' || char === 'O' || char === 'U') {
-      return '#5D2A0C'; 
+      return '#5D2A0C';
     } else if (char === 'H' || char === 'E') {
       return '#80BE26';
     } else {
-      return 'black'; 
+      return 'black';
     }
   }
-  
-  export default App;
+
+  export default RainbowLogo;

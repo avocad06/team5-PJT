@@ -31,11 +31,11 @@ const Container = styled('div')({
       },
   }));
   
-  export default function RetestButton() {
+  export default function RandomButton() {
     return (
       <Stack spacing={2} direction="row">
         <Container>
-        <ColorButton variant="contained">다시하기</ColorButton>
+        <ColorButton variant="contained">랜덤으로 결과 보기</ColorButton>
         </Container>
       </Stack>
     );
