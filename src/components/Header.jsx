@@ -1,14 +1,13 @@
 import styled from "styled-components";
 import BackButton from "./BackButton";
+import { useParams } from "react-router";
+import Logo from "../components/Logo";
 
 const StyledHeader = styled.div`
   height: 40px;
 `;
 
 export default function Header() {
-  return (
-    <StyledHeader>
-      <BackButton />
-    </StyledHeader>
-  );
+  const { id } = useParams();
+  return <StyledHeader>{id ? <BackButton /> : <Logo />}</StyledHeader>;
 }

@@ -6,6 +6,7 @@ import { Global } from "@emotion/react";
 import RainbowLogo from "./components/Logo";
 import RetestButton from "./components/Button_retest";
 import Result from "./pages/Result";
+import Main from "./pages/Main";
 
 const GlobalStyle = createGlobalStyle`
 :root {
@@ -54,11 +55,11 @@ const GlobalStyle = createGlobalStyle`
   --light-green-10: rgba(172, 206, 4, .1);
   
   /* medium gray */
-  --medium-gray-90: rgba(167, 168, 1);
-  --medium-gray-80: rgba(167, 168, .8);
-  --medium-gray-50: rgba(167, 168, .5);
-  --medium-gray-30: rgba(167, 168, .3);
-  --medium-gray-10: rgba(167, 168, .1);
+  --medium-gray-90: rgba(167, 168, 165, 1);
+  --medium-gray-80: rgba(167, 168, 165, .8);
+  --medium-gray-50: rgba(167, 168, 165, .5);
+  --medium-gray-30: rgba(167, 168, 165, .3);
+  --medium-gray-10: rgba(167, 168, 165, .1);
 }
 
 body {
@@ -80,7 +81,7 @@ h1, h2 {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <>메인 페이지입니다.</>,
+    element: <Main />,
   },
   {
     path: "/question/:id",
