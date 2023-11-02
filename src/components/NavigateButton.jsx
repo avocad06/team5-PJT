@@ -1,11 +1,4 @@
-import { Button } from "@mui/material";
-import styled from "styled-components";
-
-const StyledChoiceButton = styled.button`
-  display: block;
-  background-color: var(--primary-main);
-  color: #ffff;
-`;
+import Button from "@mui/material/Button";
 
 /* Props {
   content: string;
@@ -15,18 +8,23 @@ const StyledChoiceButton = styled.button`
 } 
  */
 
-export default function ChoiceButton({ content, isClicked, onClick }) {
+export default function NavigateButton({ content, isSelected, onClick }) {
   return (
     <Button
       variant="contained"
-      fullWidth={true}
       sx={{
+        display: "inline-block",
+        textAlign: "center",
+        overflowX: "hidden",
+        whiteSpace: "nowrap",
+        textOverflow: "ellipsis",
+        minWidth: "40%",
         fontWeight: "700",
         fontSize: "20px",
         padding: "16px",
         borderRadius: "16px",
         height: "68px",
-        backgroundColor: isClicked ? "var(--green-30)" : "var(--green-90)",
+        backgroundColor: isSelected ? "var(--green-30)" : "var(--green-90)",
         ":hover": {
           bgcolor: "var(--green-50)",
         },
@@ -34,9 +32,7 @@ export default function ChoiceButton({ content, isClicked, onClick }) {
           bgcolor: "var(--green-30)",
         },
       }}
-      onClick={() => {
-        onClick();
-      }}
+      onClick={onClick}
     >
       {content}
     </Button>

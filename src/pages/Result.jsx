@@ -1,24 +1,26 @@
 import { useNavigate } from "react-router-dom";
-import ContainedButtons from "../components/Button";
 import RainbowLogo from "../components/Logo";
-import RetestButton from "../components/Button_retest";
-import RandomButton from "../components/Button_random";
-import ShareButton from "../components/Button_share";
-import Wrapper from "../components/Wrapper";
+import ShareButton from "../components/ButtonShare";
+import { StyledWrapper } from "../components/Wrapper";
+import Button from "../components/NavigateButton";
+import { StyledFooter } from "./Main";
 
 export default function Result() {
   const navigate = useNavigate();
-  const pageNumger = 7;
+
   return (
-    <Wrapper>
+    <StyledWrapper>
       <RainbowLogo />
-      <RetestButton
-        onClick={() => {
-          navigate("/");
-        }}
-      />
-      <RandomButton />
+      <StyledFooter>
+        <Button
+          content={"다시하기"}
+          onClick={() => {
+            navigate("/");
+          }}
+        />
+        <Button content={"랜덤으로 결과보기"} />
+      </StyledFooter>
       <ShareButton />
-    </Wrapper>
+    </StyledWrapper>
   );
 }

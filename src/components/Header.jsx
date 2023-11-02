@@ -5,6 +5,7 @@ import Logo from "../components/Logo";
 
 const StyledHeader = styled.div`
   height: 40px;
+  padding: 0 40px;
 `;
 
 export default function Header() {

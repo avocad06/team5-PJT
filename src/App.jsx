@@ -2,9 +2,6 @@ import "./App.css";
 import Question from "./pages/Question";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
-import { Global } from "@emotion/react";
-import RainbowLogo from "./components/Logo";
-import RetestButton from "./components/Button_retest";
 import Result from "./pages/Result";
 import Main from "./pages/Main";
 
