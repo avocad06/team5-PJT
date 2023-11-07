@@ -5,12 +5,18 @@ import { StyledWrapper } from "../components/Wrapper";
 import Button from "../components/NavigateButton";
 import { StyledFooter } from "./Main";
 import { useState } from "react";
+import { surveyResults } from "./Question";
+
+export function getRandomIndex(arr) {
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
+}
 
 export default function Result() {
   const navigate = useNavigate();
   const { resultId } = useParams();
 
-  const allResult = [1, 2, 3, 4, 5];
+  const allResult = surveyResults.map((result) => result.id + 1);
 
   const [resultHistory, setResultHistory] = useState([parseInt(resultId)]);
 
@@ -24,12 +30,7 @@ export default function Result() {
       return [...prev, current];
     }, []);
 
-    function getRandomIntInclusive(arr) {
-      const randomIndex = Math.floor(Math.random() * arr.length);
-      return arr[randomIndex];
-    }
-
-    const nextResultId = getRandomIntInclusive(
+    const nextResultId = getRandomIndex(
       (!!undisplayedResult.length && undisplayedResult) ||
         allResult.filter((r) => r !== parseInt(resultId))
     );
@@ -42,9 +43,18 @@ export default function Result() {
     navigate(`/result/${nextResultId}`);
   };
 
+  console.log(surveyResults);
+
   return (
-    <StyledWrapper>
+    <>
       <RainbowLogo />
+      <StyledWrapper>
+        <img
+          src={
+            surveyResults.find((result) => resultId - 1 === result.id).imageUrl
+          }
+        />
+      </StyledWrapper>
       <StyledFooter>
         <Button
           content={"다시하기"}
@@ -55,6 +65,6 @@ export default function Result() {
         <Button content={"랜덤으로 결과보기"} onClick={handleRandomClick} />
       </StyledFooter>
       <ShareButton />
-    </StyledWrapper>
+    </>
   );
 }

@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import Header from "../components/Header";
 import Button from "../components/NavigateButton";
+import { getRandomIndex } from "./Result";
 
 const ChoiceWrapper = styled.div`
   display: flex;
@@ -101,6 +102,35 @@ const surveyQuestions = [
   },
 ];
 
+const group1 = ["ENFJ", "ESFJ", "ESTP", "ESFP"];
+const group2 = ["ESTJ", "ENTJ", "ENTP", "ENFP"];
+const group3 = ["ISFP", "INFJ", "ISFJ", "INFP"];
+const group4 = ["ISTP", "ISTJ", "INTJ", "INTP"];
+
+export const surveyResults = [
+  {
+    id: 0,
+    activityName: "캠핑",
+    characterGroup: group1,
+    isOutside: true,
+    imageUrl: "/images/캠핑.png",
+  },
+  {
+    id: 1,
+    activityName: "시장",
+    characterGroup: group1,
+    isOutside: true,
+    imageUrl: "/images/시장.png",
+  },
+  {
+    id: 2,
+    activityName: "도서관",
+    characterGroup: group2,
+    isOutside: false,
+    imageUrl: "/images/도서관.png",
+  },
+];
+
 export default function Question() {
   /* id 값이 있을 곳에서만 구조분해할당 해주기 */
   const { questionId } = useParams();
@@ -108,8 +138,7 @@ export default function Question() {
   const SESSION_SELECTED_OPTIONS_KEY = "selectOptions";
 
   const [loading, setLoading] = useState(false);
-  /* 답변 저장 state */
-  const [selectedOptions, setSelectedOptions] = useState(false);
+
   const navigate = useNavigate();
 
   /* 질문 개수 */
@@ -117,12 +146,13 @@ export default function Question() {
 
   const handleLoading = async () => {
     setLoading(true);
-    getResult();
+    const resultId = getResult();
+    console.log(resultId);
     sessionStorage.removeItem(SESSION_SELECTED_OPTIONS_KEY);
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
     // 페이지 이동
-    navigate("/result/1");
+    navigate(`/result/${resultId}`);
   };
 
   const choiceButtons = surveyQuestions.find(
@@ -201,6 +231,26 @@ export default function Question() {
       return prev + question.selectResult[current.selectedOption];
     }, "");
     console.log(resultCharacter);
+
+    // 1. 마지막 글자에 따라 실내인지 실외인지 확인한다
+    const isOutside = resultCharacter.charAt(resultCharacter.length - 1);
+    // 2. MBTI와 실내/외가 일치하는지 확인한다
+    const character = resultCharacter.slice(0, 4);
+    // 3. 일치한다면, 해당 MBTI를 가진 활동을 모아, 랜덤 리스트를 만든다.
+    const randomList =
+      isOutside === character.charAt(0)
+        ? surveyResults
+            .filter((result) => result.characterGroup.includes(character))
+            .map((activity) => activity.id + 1)
+        : // 4. 일치하지 않는다면, 현재 날씨가 들어간 활동을 모아, 랜덜 리스트를 만든다.
+          surveyResults
+            .filter((result) =>
+              isOutside === "E" ? result.isOutside : !result.isOutside
+            )
+            .map((activity) => activity.id + 1);
+    // 5. 랜덤 결과를 출력한다.
+    const nextResultId = getRandomIndex(randomList);
+    return nextResultId;
   }
 
   return (
