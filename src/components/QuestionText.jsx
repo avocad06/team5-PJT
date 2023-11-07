@@ -15,6 +15,6 @@ const StyledQuestionText = styled.h2`
   margin-bottom: 100px;
 `;
 
-export default function QuestionText() {
-  return <StyledQuestionText>오늘 나의 기분은?</StyledQuestionText>;
+export default function QuestionText({ content }) {
+  return <StyledQuestionText>{content}</StyledQuestionText>;
 }

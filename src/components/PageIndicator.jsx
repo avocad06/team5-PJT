@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledParagraph = styled.p`
@@ -8,10 +9,11 @@ const StyledParagraph = styled.p`
   margin-bottom: 26px;
 `;
 
-export default function PageIndicator() {
+export default function PageIndicator({ lastPage }) {
+  const { questionId } = useParams();
   return (
     <StyledParagraph>
-      <span>2</span>/<span>5</span>
+      <span>{questionId}</span>/<span>{lastPage}</span>
     </StyledParagraph>
   );
 }

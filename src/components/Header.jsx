@@ -9,6 +9,6 @@ const StyledHeader = styled.div`
 `;
 
 export default function Header() {
-  const { id } = useParams();
-  return <StyledHeader>{id ? <BackButton /> : <Logo />}</StyledHeader>;
+  const { questionId } = useParams();
+  return <StyledHeader>{questionId ? <BackButton /> : <Logo />}</StyledHeader>;
 }
