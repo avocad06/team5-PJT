@@ -4,7 +4,7 @@ import QuestionText from "../components/QuestionText";
 import { StyledWrapper } from "../components/Wrapper";
 import LoadingResult from "../components/LoadingResult";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Header from "../components/Header";
 import Button from "../components/NavigateButton";
 
@@ -97,7 +97,7 @@ const surveyQuestions = [
         content: "눈",
       },
     ],
-    selectResult: ["실외", "실내"],
+    selectResult: ["E", "I"],
   },
 ];
 
@@ -105,21 +105,20 @@ export default function Question() {
   /* id 값이 있을 곳에서만 구조분해할당 해주기 */
   const { questionId } = useParams();
 
+  const SESSION_SELECTED_OPTIONS_KEY = "selectOptions";
+
   const [loading, setLoading] = useState(false);
   /* 답변 저장 state */
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState(false);
   const navigate = useNavigate();
 
   /* 질문 개수 */
   const questionLength = 5;
 
-  useEffect(() => {
-    // getResult();
-  }, [selectedOptions]);
-
   const handleLoading = async () => {
     setLoading(true);
-
+    getResult();
+    sessionStorage.removeItem(SESSION_SELECTED_OPTIONS_KEY);
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
     // 페이지 이동
@@ -128,31 +127,53 @@ export default function Question() {
 
   const choiceButtons = surveyQuestions.find(
     (q) => q.id + 1 === parseInt(questionId)
-  ).optionContents;
+  )?.optionContents;
 
   const handleOptionClick = (index) => {
-    const prevData = selectedOptions.find(
-      (option) => option.questionId === parseInt(questionId)
-    );
+    const getStorage = sessionStorage.getItem(SESSION_SELECTED_OPTIONS_KEY);
 
-    const nextOptions = prevData
-      ? selectedOptions.map((option) =>
-          option.questionId === prevData.questionId
-            ? {
-                ...option,
-                selectedOption: index,
-              }
-            : option
-        )
-      : [
-          ...selectedOptions,
+    if (!getStorage) {
+      sessionStorage.setItem(
+        SESSION_SELECTED_OPTIONS_KEY,
+        JSON.stringify([
           {
             questionId: parseInt(questionId),
             selectedOption: index,
           },
-        ];
+        ])
+      );
+    }
 
-    setSelectedOptions(nextOptions);
+    // 2. 가져온 값 중에 현재 질문에 답변한 객체가 있는지 확인한다.
+    if (getStorage) {
+      const prevData = JSON.parse(getStorage);
+      const prevOption = prevData.find(
+        (option) => option.questionId === parseInt(questionId)
+      );
+
+      // 3. 있다면, 해당 객체를 수정하고, 없다면 추가하도록 구현
+      const nextOptions = prevOption
+        ? prevData.map((option) =>
+            option.questionId === prevOption.questionId
+              ? {
+                  ...option,
+                  selectedOption: index < 2 ? index : 1,
+                }
+              : option
+          )
+        : [
+            ...prevData,
+            {
+              questionId: parseInt(questionId),
+              selectedOption: index < 2 ? index : 1,
+            },
+          ];
+
+      sessionStorage.setItem(
+        SESSION_SELECTED_OPTIONS_KEY,
+        JSON.stringify(nextOptions)
+      );
+    }
 
     if (parseInt(questionId) === questionLength) {
       handleLoading();
@@ -162,12 +183,24 @@ export default function Question() {
     navigate(`/question/${parseInt(questionId) + 1}`);
   };
 
+  const buttonSelected =
+    sessionStorage.getItem(SESSION_SELECTED_OPTIONS_KEY) &&
+    JSON.parse(sessionStorage.getItem(SESSION_SELECTED_OPTIONS_KEY))?.find(
+      (option) => option.questionId === parseInt(questionId)
+    )?.selectedOption;
+
   function getResult() {
-    const result = selectedOptions.reduce((prev, current) => {
-      const question = surveyQuestions.find((q) => q.id === current.questionId);
+    const getStorage = sessionStorage.getItem(SESSION_SELECTED_OPTIONS_KEY);
+
+    if (!getStorage) navigate(`/question/1}`);
+
+    const resultCharacter = JSON.parse(getStorage).reduce((prev, current) => {
+      const question = surveyQuestions.find(
+        (q) => q.id + 1 === current.questionId
+      );
       return prev + question.selectResult[current.selectedOption];
     }, "");
-    console.log(result);
+    console.log(resultCharacter);
   }
 
   return (
@@ -186,11 +219,7 @@ export default function Question() {
             <Button
               key={option.id}
               content={option.content}
-              isSelected={
-                selectedOptions.find(
-                  (option) => option.questionId === parseInt(questionId)
-                )?.selectedOption === index && true
-              }
+              isSelected={buttonSelected === index}
               onClick={() => handleOptionClick(index)}
             />
           ))}
