@@ -6,6 +6,8 @@ import Button from "../components/NavigateButton";
 import { StyledFooter } from "./Main";
 import { useState } from "react";
 import { surveyResults } from "./Question";
+import ResultContent from "../components/ResultContent";
+import KakaoMap from "../components/KakaoMap";
 
 export function getRandomIndex(arr) {
   const randomIndex = Math.floor(Math.random() * arr.length);
@@ -48,13 +50,10 @@ export default function Result() {
   return (
     <>
       <RainbowLogo />
-      <StyledWrapper>
-        <img
-          src={
-            surveyResults.find((result) => resultId - 1 === result.id).imageUrl
-          }
-        />
-      </StyledWrapper>
+      <ResultContent
+        result={surveyResults.find((result) => resultId - 1 === result.id)}
+      />
+      <KakaoMap size={[400, 400]} />
       <StyledFooter>
         <Button
           content={"다시하기"}
