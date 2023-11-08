@@ -33,7 +33,7 @@ const surveyQuestions = [
   },
   {
     id: 1,
-    surveyContent: "노래를 들을 때 무엇을 더 선호하나요?",
+    surveyContent: "노래를 들을 때 더 선호하는 것은?",
     optionContents: [
       {
         id: 0,
@@ -64,7 +64,7 @@ const surveyQuestions = [
   {
     id: 3,
     surveyContent:
-      "여행을 떠나려는 당신! 다음 중 당신과 더 잘 맞는 것은 무엇인가요?",
+      "여행을 떠날 때 당신이라면?",
     optionContents: [
       {
         id: 0,
@@ -72,7 +72,7 @@ const surveyQuestions = [
       },
       {
         id: 1,
-        content: "그때그때 상황에 맞게 결정하며 융통성 있게 즐기려고 노력해!",
+        content: "그때그때 상황에 맞게 즐기려고 노력해!",
       },
     ],
     selectResult: ["J", "P"],
