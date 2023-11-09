@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Button from "../components/NavigateButton";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
+import { StyledImageWrapper } from "../components/ResultContent";
 
 export const StyledFooter = styled.footer`
   display: flex;
@@ -20,8 +21,12 @@ export default function Main() {
     <>
       <Header />
       <StyledWrapper>
-        <SubText content={"오늘 청주에서 할 일을 찾아드립니다 어쩌구"} />
+        <SubText content={"서브 텍스트 자리입니다."} />
         <MainText content={"오늘 뭐하지? 모해유"} />
+        <StyledImageWrapper>
+          <img src={"/images/메인이미지.png"} alt={"메인 이미지"} />
+        </StyledImageWrapper>
+
         <StyledFooter>
           <Button
             content={"시작하기"}

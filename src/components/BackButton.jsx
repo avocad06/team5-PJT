@@ -17,9 +17,10 @@ export default function BackButton() {
         style={{
           width: "15px",
           height: "15px",
-          borderTop: "2px solid #000",
-          borderRight: "2px solid #000",
+          borderTop: "2px solid #fff",
+          borderRight: "2px solid #fff",
           transform: "rotate(-135deg)",
+          borderTopBottomRadius: "2px",
         }}
       ></div>
     </StyledBackButton>

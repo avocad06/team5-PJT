@@ -37,6 +37,7 @@ function App() {
 }
 
 const StyledLogo = styled.h1`
+  font-family: "Sniglet", sans-serif;
   color: var(--brown-90);
 `;
 

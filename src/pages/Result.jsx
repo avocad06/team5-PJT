@@ -8,11 +8,20 @@ import { useState } from "react";
 import { surveyResults } from "./Question";
 import ResultContent from "../components/ResultContent";
 import KakaoMap from "../components/KakaoMap";
+import PlayList from "../components/Playlist";
+import Header from "../components/Header";
+import styled from "styled-components";
 
 export function getRandomIndex(arr) {
   const randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex];
 }
+
+const StyledButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+`;
 
 export default function Result() {
   const navigate = useNavigate();
@@ -49,21 +58,26 @@ export default function Result() {
 
   return (
     <>
-      <RainbowLogo />
+      <Header />
       <ResultContent
         result={surveyResults.find((result) => resultId - 1 === result.id)}
       />
       <KakaoMap size={[400, 400]} />
-      <StyledFooter>
-        <Button
-          content={"다시하기"}
-          onClick={() => {
-            navigate("/");
-          }}
-        />
-        <Button content={"랜덤으로 결과보기"} onClick={handleRandomClick} />
-      </StyledFooter>
-      <ShareButton />
+      <PlayList query={"청소 플레이리스트"} />
+      <StyledWrapper>
+        <ShareButton />
+        <StyledFooter>
+          <StyledButtonWrapper>
+            <Button
+              content={"다시하기"}
+              onClick={() => {
+                navigate("/");
+              }}
+            />
+            <Button content={"랜덤으로 결과보기"} onClick={handleRandomClick} />
+          </StyledButtonWrapper>
+        </StyledFooter>
+      </StyledWrapper>
     </>
   );
 }

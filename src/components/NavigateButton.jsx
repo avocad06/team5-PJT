@@ -21,7 +21,7 @@ export default function NavigateButton({ content, isSelected, onClick }) {
         fontSize: "20px",
         padding: "16px",
         borderRadius: "16px",
-        backgroundColor: isSelected ? "var(--green-30)" : "var(--green-90)",
+        backgroundColor: isSelected ?? "var(--light-green-90)",
         ":hover": {
           bgcolor: "var(--green-50)",
         },

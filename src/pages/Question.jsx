@@ -83,19 +83,19 @@ const surveyQuestions = [
     optionContents: [
       {
         id: 0,
-        content: "맑음",
+        content: <>&#9728;&#65039;</>,
       },
       {
         id: 1,
-        content: "흐림",
+        content: <>&#9729;&#65039;</>,
       },
       {
         id: 2,
-        content: "비",
+        content: <>&#9730;&#65039;</>,
       },
       {
         id: 3,
-        content: "눈",
+        content: <>&#10052;&#65039;</>,
       },
     ],
     selectResult: ["E", "I"],
@@ -269,7 +269,9 @@ export default function Question() {
             <Button
               key={option.id}
               content={option.content}
-              isSelected={buttonSelected === index}
+              isSelected={
+                buttonSelected === index ? "var(--green-30)" : "var(--green-90)"
+              }
               onClick={() => handleOptionClick(index)}
             />
           ))}
