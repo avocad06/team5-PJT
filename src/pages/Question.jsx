@@ -63,8 +63,7 @@ const surveyQuestions = [
   },
   {
     id: 3,
-    surveyContent:
-      "여행을 떠날 때 당신이라면?",
+    surveyContent: "여행을 떠날 때 당신이라면?",
     optionContents: [
       {
         id: 0,
@@ -104,7 +103,7 @@ const surveyQuestions = [
 
 const group1 = ["ENFJ", "ESFJ", "ESTP", "ESFP"];
 const group2 = ["ESTJ", "ENTJ", "ENTP", "ENFP"];
-const group3 = ["ISFP", "INFJ", "ISFJ", "INFP"];
+export const group3 = ["ISFP", "INFJ", "ISFJ", "INFP"];
 const group4 = ["ISTP", "ISTJ", "INTJ", "INTP"];
 
 export const surveyResults = [
@@ -126,8 +125,15 @@ export const surveyResults = [
     id: 2,
     activityName: "도서관",
     characterGroup: group2,
-    isOutside: false,
+    isOutside: true,
     imageUrl: "/images/도서관.png",
+  },
+  {
+    id: 3,
+    activityName: "안무 영상 따라하기",
+    characterGroup: group4,
+    isOutside: false,
+    imageUrl: "/images/안무영상 따라하기.png",
   },
 ];
 
@@ -269,7 +275,7 @@ export default function Question() {
             <Button
               key={option.id}
               content={option.content}
-              isSelected={
+              selectedColor={
                 buttonSelected === index ? "var(--green-30)" : "var(--green-90)"
               }
               onClick={() => handleOptionClick(index)}

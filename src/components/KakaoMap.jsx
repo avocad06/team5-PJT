@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useKakaoLoader, Map, MapMarker } from "react-kakao-maps-sdk";
 import MapItem from "./MapItem";
 
-export default function KakaoMap(props) {
+export default function KakaoMap({ query }) {
   const [loading, error] = useKakaoLoader({
     appkey: import.meta.env.VITE_KAOKAO_API_KEY,
     libraries: ["services"],
@@ -19,7 +19,7 @@ export default function KakaoMap(props) {
     if (!map) return;
     const ps = new kakao.maps.services.Places();
 
-    ps.keywordSearch("청주 도서관", (data, status, _pagination) => {
+    ps.keywordSearch(`청주 ${query}`, (data, status, _pagination) => {
       if (status === kakao.maps.services.Status.OK) {
         console.log(data);
         setResultData(
@@ -65,8 +65,10 @@ export default function KakaoMap(props) {
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
         map.setBounds(bounds);
       }
+
+      console.log(status, data);
     });
-  }, [map]);
+  }, [map, query]);
 
   return (
     <Map // 로드뷰를 표시할 Container

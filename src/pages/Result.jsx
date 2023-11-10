@@ -1,11 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
-import RainbowLogo from "../components/Logo";
 import ShareButton from "../components/ButtonShare";
 import { StyledWrapper } from "../components/Wrapper";
 import Button from "../components/NavigateButton";
 import { StyledFooter } from "./Main";
 import { useState } from "react";
-import { surveyResults } from "./Question";
+import { group3, surveyResults } from "./Question";
 import ResultContent from "../components/ResultContent";
 import KakaoMap from "../components/KakaoMap";
 import PlayList from "../components/Playlist";
@@ -26,6 +25,10 @@ const StyledButtonWrapper = styled.div`
 export default function Result() {
   const navigate = useNavigate();
   const { resultId } = useParams();
+
+  const resultActivity = surveyResults.find(
+    (result) => resultId - 1 === result.id
+  );
 
   const allResult = surveyResults.map((result) => result.id + 1);
 
@@ -59,11 +62,16 @@ export default function Result() {
   return (
     <>
       <Header />
-      <ResultContent
-        result={surveyResults.find((result) => resultId - 1 === result.id)}
-      />
-      <KakaoMap size={[400, 400]} />
-      <PlayList query={"청소 플레이리스트"} />
+      <ResultContent result={resultActivity} />
+      {!!resultActivity.isOutside && (
+        <KakaoMap query={resultActivity.activityName} size={[400, 400]} />
+      )}
+      {!resultActivity.isOutside && (
+        <PlayList
+          multiplePlayList={resultActivity.characterGroup === group3}
+          query={resultActivity.activityName}
+        />
+      )}
       <StyledWrapper>
         <ShareButton />
         <StyledFooter>

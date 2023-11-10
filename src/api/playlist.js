@@ -21,7 +21,7 @@ const getVideos = async (arr) => {
             }
         })
 
-        return getVideoRes?.data.items ?? null
+        return getVideoRes?.data.items
     } catch (err) {
         console.log(err)
     }

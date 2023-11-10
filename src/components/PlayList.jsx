@@ -2,8 +2,27 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { searchVideoResults } from "../api/Playlist";
 import PlayListItem from "./playlist/PlayListItem";
+import styled from "styled-components";
+import SubText from "./SubText";
 
-export default function PlayList({ query }) {
+const StyledPlayListWrapper = styled.div`
+  display: flex;
+  gap: 15px;
+  overflow: hidden;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+`;
+
+const StyledPlayList = styled.section`
+  padding: 60px 0;
+  ${StyledPlayListWrapper} {
+    margin-top: 100px;
+  }
+`;
+
+export default function PlayList({ multiplePlayList, query }) {
   const [allVideoData, setAllVideoData] = useState([]);
   const fetchSearchResult = async () => {
     try {
@@ -18,19 +37,21 @@ export default function PlayList({ query }) {
   };
 
   useEffect(() => {
-    // fetchSearchResult();
     async function fetchVideo() {
-      const videoData = await searchVideoResults("청소하기 플레이리스트");
-      setAllVideoData(videoData);
+      const videoData = await searchVideoResults(query);
+      setAllVideoData(multiplePlayList ? videoData : [videoData[0]]);
     }
 
     fetchVideo();
   }, [query]);
   return (
-    <>
-      {allVideoData.map((video) => (
-        <PlayListItem videoContent={video} key={video.id} />
-      ))}
-    </>
+    <StyledPlayList>
+      <SubText content={"관련 영상 추천해드려요!"} />
+      <StyledPlayListWrapper>
+        {allVideoData.map((video) => (
+          <PlayListItem videoContent={video} key={video.id} />
+        ))}
+      </StyledPlayListWrapper>
+    </StyledPlayList>
   );
 }

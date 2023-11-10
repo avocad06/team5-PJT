@@ -6,11 +6,10 @@ import { StyledWrapper } from "./Wrapper";
 export const StyledImageWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding: 20px 0;
+  padding: 20px 0px;
 `;
 
 export default function ResultContent({ result }) {
-  console.log(result);
   const { imageUrl, activityName } = result;
   return (
     <section style={{ backgroundColor: "white" }}>
