@@ -102,7 +102,7 @@ export default function KakaoMap({ query }) {
               }}
             >
               <div
-                class={"list-cover"}
+                className={"list-cover"}
                 style={{
                   height: "320px",
                   overflowY: "scroll",

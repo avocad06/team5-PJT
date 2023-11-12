@@ -4,7 +4,7 @@ import { StyledWrapper } from "../components/Wrapper";
 import Button from "../components/NavigateButton";
 import { StyledFooter } from "./Main";
 import { useState } from "react";
-import { group3, surveyResults } from "./Question";
+import { group3, surveyResults } from "../const/result";
 import ResultContent from "../components/ResultContent";
 import KakaoMap from "../components/KakaoMap";
 import PlayList from "../components/Playlist";
