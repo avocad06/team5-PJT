@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useKakaoLoader, Map, MapMarker } from "react-kakao-maps-sdk";
 import MapItem from "./MapItem";
+import { createPortal } from "react-dom";
 
 export default function KakaoMap({ query }) {
   const [loading, error] = useKakaoLoader({
@@ -71,43 +72,65 @@ export default function KakaoMap({ query }) {
   }, [map, query]);
 
   return (
-    <Map // 로드뷰를 표시할 Container
-      center={{
-        lat: 37.566826,
-        lng: 126.9786567,
-      }}
+    <div
+      id="map"
       style={{
-        width: "100%",
-        height: "350px",
         position: "relative",
       }}
-      level={3}
-      onCreate={setMap}
     >
-      <ul
+      <Map // 로드뷰를 표시할 Container
+        center={{
+          lat: 37.566826,
+          lng: 126.9786567,
+        }}
+        level={3}
+        onCreate={setMap}
         style={{
-          position: "absolute",
-          boxShadow: "0 0 0 4px inset orange",
-          maxWidth: "400px",
-          overflowY: "scroll",
-          maxHeight: "100%",
+          width: "100%",
+          height: "350px",
         }}
       >
-        {resultData.map((data) => (
-          <MapItem data={data} key={data.id} />
-        ))}
-      </ul>
-      {markers.map((marker) => (
-        <MapMarker
-          key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
-          position={marker.position}
-          onClick={() => setInfo(marker)}
-        >
-          {info && info.content === marker.content && (
-            <div style={{ color: "#000" }}>{marker.content}</div>
+        {!loading &&
+          createPortal(
+            <div
+              style={{
+                position: "absolute",
+                maxWidth: "400px",
+                padding: "15px",
+                zIndex: 2,
+                top: 0,
+              }}
+            >
+              <div
+                class={"list-cover"}
+                style={{
+                  height: "320px",
+                  overflowY: "scroll",
+                  backgroundColor: "var(--beige-80)",
+                  borderRadius: "15px",
+                }}
+              >
+                <ul>
+                  {resultData.map((data) => (
+                    <MapItem data={data} key={data.id} />
+                  ))}
+                </ul>
+              </div>
+            </div>,
+            document.getElementById("map")
           )}
-        </MapMarker>
-      ))}
-    </Map>
+        {markers.map((marker) => (
+          <MapMarker
+            key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+            position={marker.position}
+            onClick={() => setInfo(marker)}
+          >
+            {info && info.content === marker.content && (
+              <div style={{ color: "#000" }}>{marker.content}</div>
+            )}
+          </MapMarker>
+        ))}
+      </Map>
+    </div>
   );
 }
