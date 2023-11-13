@@ -24,7 +24,7 @@ export default function Main() {
         <SubText content={"오늘 청주에서 할 일을 찾아드립니다"} />
         <MainText content={"오늘 뭐하지? 모해유"} />
         <StyledImageWrapper>
-          <img src={"/images/메인이미지.png"} alt={"메인 이미지"} />
+          <img src={"/images/main.png"} alt={"메인 이미지"} />
         </StyledImageWrapper>
 
         <StyledFooter>
