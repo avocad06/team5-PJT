@@ -21,7 +21,7 @@ export default function Main() {
     <>
       <Header />
       <StyledWrapper>
-        <SubText content={"서브 텍스트 자리입니다."} />
+        <SubText content={"오늘 청주에서 할 일을 찾아드립니다"} />
         <MainText content={"오늘 뭐하지? 모해유"} />
         <StyledImageWrapper>
           <img src={"/images/메인이미지.png"} alt={"메인 이미지"} />
@@ -29,6 +29,7 @@ export default function Main() {
 
         <StyledFooter>
           <Button
+            isCenter={true}
             content={"시작하기"}
             onClick={() => navigate("/question/1")}
           />

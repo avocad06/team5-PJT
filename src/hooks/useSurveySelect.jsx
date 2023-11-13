@@ -15,6 +15,10 @@ export function useSurveySelect() {
 
   const questionLength = 5;
 
+  const targetQuestionCount = parseInt(questionId);
+
+  const totalQuestionCount = surveyQuestions.length;
+
   useEffect(() => {
     const savedSelectedOptions = sessionStorage.getItem(
       SESSION_SELECTED_OPTIONS_KEY
@@ -148,5 +152,7 @@ export function useSurveySelect() {
     questionContent,
     optionsContent,
     handleOptionClick,
+    targetQuestionCount,
+    totalQuestionCount,
   };
 }

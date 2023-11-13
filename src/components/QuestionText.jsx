@@ -12,7 +12,8 @@ import styled from "styled-components";
 const StyledQuestionText = styled.h2`
   font-size: 40px;
   color: var(--brown-90);
-  margin-bottom: 100px;
+  min-height: 240px;
+  line-height: 56px;
 `;
 
 export default function QuestionText({ content }) {

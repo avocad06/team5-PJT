@@ -17,6 +17,8 @@ const ChoiceWrapper = styled.div`
 export default function Question() {
   /* id 값이 있을 곳에서만 구조분해할당 해주기 */
   const {
+    targetQuestionCount,
+    totalQuestionCount,
     questionContent,
     optionsContent,
     selectedIndex,
@@ -28,7 +30,10 @@ export default function Question() {
     <>
       <Header />
       <StyledWrapper>
-        <PageIndicator lastPage={surveyQuestions.length} />
+        <PageIndicator
+          targetPage={targetQuestionCount}
+          lastPage={totalQuestionCount}
+        />
         <QuestionText content={questionContent} />
         <ChoiceWrapper>
           {optionsContent.map((option, index) => (
@@ -39,6 +44,7 @@ export default function Question() {
                 selectedIndex === index ? "var(--green-30)" : "var(--green-90)"
               }
               onClick={() => handleOptionClick(index)}
+              isCenter={targetQuestionCount === totalQuestionCount}
             />
           ))}
         </ChoiceWrapper>

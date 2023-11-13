@@ -14,7 +14,7 @@ export default function ResultContent({ result }) {
   return (
     <section style={{ backgroundColor: "white" }}>
       <StyledWrapper>
-        <SubText content={"서브텍스트 자리입니다."} />
+        <SubText content={"오늘 청주에서 할 일을 추천드려요!"} />
         <StyledImageWrapper>
           <img src={imageUrl} alt={`${activityName} 이미지`} width={"300px"} />
         </StyledImageWrapper>

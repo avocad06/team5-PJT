@@ -8,13 +8,18 @@ import Button from "@mui/material/Button";
 } 
  */
 
-export default function NavigateButton({ content, selectedColor, onClick }) {
+export default function NavigateButton({
+  content,
+  selectedColor,
+  onClick,
+  isCenter,
+}) {
   return (
     <Button
       variant="contained"
       sx={{
         display: "inline-block",
-        textAlign: "center",
+        textAlign: isCenter && "center",
         overflowX: "hidden",
         minWidth: "40%",
         fontWeight: "700",

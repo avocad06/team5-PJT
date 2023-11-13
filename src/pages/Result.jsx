@@ -77,12 +77,17 @@ export default function Result() {
         <StyledFooter>
           <StyledButtonWrapper>
             <Button
+              isCenter={true}
               content={"다시하기"}
               onClick={() => {
                 navigate("/");
               }}
             />
-            <Button content={"랜덤으로 결과보기"} onClick={handleRandomClick} />
+            <Button
+              isCenter={true}
+              content={"랜덤으로 결과보기"}
+              onClick={handleRandomClick}
+            />
           </StyledButtonWrapper>
         </StyledFooter>
       </StyledWrapper>

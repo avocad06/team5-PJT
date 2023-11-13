@@ -9,11 +9,10 @@ const StyledParagraph = styled.p`
   margin-bottom: 26px;
 `;
 
-export default function PageIndicator({ lastPage }) {
-  const { questionId } = useParams();
+export default function PageIndicator({ targetPage, lastPage }) {
   return (
     <StyledParagraph>
-      <span>{questionId}</span>/<span>{lastPage}</span>
+      <span>{targetPage}</span>/<span>{lastPage}</span>
     </StyledParagraph>
   );
 }
