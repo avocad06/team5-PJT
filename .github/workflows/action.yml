@@ -16,8 +16,8 @@ jobs:
 
       - name: Generate Environment Variables File for Production
         run: |
-          echo "VITE_KAOKAO_API_KEY=$VITE_KAOKAO_API_KEY" >> .env.production
-          echo "VITE_YOUTUBE_API_KEY=$VITE_YOUTUBE_API_KEY" >> .env.production
+          echo "VITE_KAOKAO_API_KEY=$VITE_KAOKAO_API_KEY" >> $GITHUB_ENV
+          echo "VITE_YOUTUBE_API_KEY=$VITE_YOUTUBE_API_KEY" >> $GITHUB_ENV
         env:
           VITE_KAOKAO_API_KEY: ${{ secrets.VITE_KAOKAO_API_KEY }}
           VITE_YOUTUBE_API_KEY: ${{ secrets.VITE_YOUTUBE_API_KEY }}
