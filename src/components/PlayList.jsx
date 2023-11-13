@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { searchVideoResults } from "../api/Playlist";
+import { searchVideoResults } from "../api/playlist";
 import PlayListItem from "./playlist/PlayListItem";
 import styled from "styled-components";
 import SubText from "./SubText";

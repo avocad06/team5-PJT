@@ -5,7 +5,7 @@ import { StyledFooter } from "./Main";
 import { group3 } from "../const/result";
 import ResultContent from "../components/ResultContent";
 import KakaoMap from "../components/KakaoMap";
-import PlayList from "../components/Playlist";
+import PlayList from "../components/PlayList";
 import Header from "../components/Header";
 import styled from "styled-components";
 import { useGetResult } from "../hooks/useGetResult";
