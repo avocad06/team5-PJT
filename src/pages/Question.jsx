@@ -1,4 +1,4 @@
-import PageIndicator from "../components/pageIndicator";
+import PageIndicator from "../components/PageIndicator";
 import QuestionText from "../components/QuestionText";
 import { StyledWrapper } from "../components/Wrapper";
 import LoadingResult from "../components/LoadingResult";
