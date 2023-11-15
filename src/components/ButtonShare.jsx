@@ -78,7 +78,7 @@ export default function ShareButton() {
   }, [status]);
   const handleKakaoButton = () => {
     window.Kakao.Link.sendScrap({
-      requestUrl: currentUrl,
+      requestUrl:  "http://moheyoubucket.s3-website.ap-northeast-2.amazonaws.com/",
     });
   };
 
