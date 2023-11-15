@@ -33,6 +33,7 @@ export default function NavigateButton({
         ":active": {
           bgcolor: "var(--green-30)",
         },
+        paddingLeft: "30px",
       }}
       onClick={onClick}
     >

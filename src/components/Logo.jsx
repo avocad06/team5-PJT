@@ -1,5 +1,6 @@
-import { fontSize } from "@mui/system";
 import styled from "styled-components";
+import { StyledButton } from "./BackButton";
+import { useNavigate } from "react-router-dom";
 
 const LogoContainer = styled.div`
   font-family: "Sniglet", sans-serif;
@@ -39,6 +40,8 @@ function App() {
 const StyledLogo = styled.h1`
   font-family: "Sniglet", sans-serif;
   color: var(--brown-90);
+  padding-left: 80px;
+  font-weight: 500;
 `;
 
 const StyledAccent = styled.span`
@@ -46,10 +49,13 @@ const StyledAccent = styled.span`
 `;
 
 export default function Logo() {
+  const navigate = useNavigate();
   return (
-    <StyledLogo>
-      MO<StyledAccent>HE</StyledAccent>YOU
-    </StyledLogo>
+    <StyledButton onClick={() => navigate("/")}>
+      <StyledLogo>
+        MO<StyledAccent>HE</StyledAccent>YOU
+      </StyledLogo>
+    </StyledButton>
   );
 }
 

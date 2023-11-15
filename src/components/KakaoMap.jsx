@@ -98,7 +98,7 @@ export default function KakaoMap({ query }) {
               <div
                 style={{
                   position: "absolute",
-                  maxWidth: "400px",
+                  maxWidth: "200px",
                   padding: "15px",
                   zIndex: 2,
                   top: 0,
@@ -109,8 +109,8 @@ export default function KakaoMap({ query }) {
                   style={{
                     height: "320px",
                     overflowY: "scroll",
-                    backgroundColor: "var(--beige-80)",
-                    borderRadius: "15px",
+                    backgroundColor: "#FFFFFF",
+                    borderRadius: "10px",
                   }}
                 >
                   <ul>

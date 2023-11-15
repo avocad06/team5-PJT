@@ -14,27 +14,47 @@ export const StyledFooter = styled.footer`
   gap: 15px;
 `;
 
+const StyledMainContent = styled.section`
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 520px;
+  inset: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: calc(100% - 250px);
+`;
+
 export default function Main() {
   const navigate = useNavigate();
 
   return (
     <>
-      <Header />
-      <StyledWrapper>
-        <SubText content={"오늘 청주에서 할 일을 찾아드립니다"} />
-        <MainText content={"오늘 뭐하지? 모해유"} />
-        <StyledImageWrapper>
-          <img src={"/images/main.png"} alt={"메인 이미지"} />
-        </StyledImageWrapper>
+      <Header isLogoHeader={true} />
+      <StyledMainContent>
+        <StyledWrapper>
+          <SubText content={"오늘 청주에서 할 일을 찾아드립니다"} />
+          <MainText content={"오늘 뭐하지? 모해유"} />
+          <StyledImageWrapper>
+            <img
+              src={"/images/main.png"}
+              alt={"메인 이미지"}
+              style={{
+                marginTop: "22px",
+                marginBottom: "48px",
+              }}
+            />
+          </StyledImageWrapper>
 
-        <StyledFooter>
-          <Button
-            isCenter={true}
-            content={"시작하기"}
-            onClick={() => navigate("/question/1")}
-          />
-        </StyledFooter>
-      </StyledWrapper>
+          <StyledFooter>
+            <Button
+              isCenter={true}
+              content={"시작하기"}
+              onClick={() => navigate("/question/1")}
+            />
+          </StyledFooter>
+        </StyledWrapper>
+      </StyledMainContent>
     </>
   );
 }

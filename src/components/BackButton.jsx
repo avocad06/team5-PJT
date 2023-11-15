@@ -1,28 +1,29 @@
-import { useNavigate } from "react-router";
 import styled from "styled-components";
+import { useUrlBack } from "../hooks/useURLBack";
 
-const StyledBackButton = styled.button`
+export const StyledButton = styled.button`
   display: inline-block;
-  padding: 20px;
+  padding: 15px;
+  padding-right: 40px;
   cursor: pointer;
 `;
 
 // state 등이 있어서 wrapping을 하면 의미가 있으나 그렇지 않으면 의미가 x
 export default function BackButton() {
-  const navigate = useNavigate();
+  const { handleClickBack } = useUrlBack();
 
   return (
-    <StyledBackButton onClick={() => navigate(-1)}>
+    <StyledButton onClick={handleClickBack}>
       <div
         style={{
-          width: "15px",
-          height: "15px",
-          borderTop: "2px solid #fff",
-          borderRight: "2px solid #fff",
+          width: "28px",
+          height: "28px",
+          borderTop: "6.2px solid #fff",
+          borderRight: "6.2px solid #fff",
           transform: "rotate(-135deg)",
-          borderTopBottomRadius: "2px",
+          borderRadius: "2px",
         }}
       ></div>
-    </StyledBackButton>
+    </StyledButton>
   );
 }

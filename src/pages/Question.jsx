@@ -5,7 +5,6 @@ import LoadingResult from "../components/LoadingResult";
 import styled from "styled-components";
 import Header from "../components/Header";
 import Button from "../components/NavigateButton";
-import { surveyQuestions } from "../const/Question";
 import { useSurveySelect } from "../hooks/useSurveySelect";
 
 const ChoiceWrapper = styled.div`

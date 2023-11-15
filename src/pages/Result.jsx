@@ -17,8 +17,11 @@ export function getRandomIndex(arr) {
 
 const StyledButtonWrapper = styled.div`
   display: flex;
+  min-width: 520px;
   flex-direction: column;
   gap: 15px;
+  padding-top: 22px;
+  padding-bottom: 23px;
 `;
 
 export default function Result() {
@@ -26,7 +29,7 @@ export default function Result() {
 
   return (
     <>
-      <Header />
+      <Header color={"#FFFFFF"} isLogoHeader={true} />
       <ResultContent result={resultActivity} />
       {!!resultActivity.isOutside && (
         <KakaoMap query={resultActivity.activityName} size={[400, 400]} />
@@ -37,15 +40,15 @@ export default function Result() {
           query={resultActivity.activityName}
         />
       )}
-      <StyledWrapper>
-        <ShareButton />
-        <StyledFooter>
+      <ShareButton />
+      <StyledFooter>
+        <StyledWrapper>
           <StyledButtonWrapper>
             <Button
               isCenter={true}
               content={"다시하기"}
               onClick={() => {
-                navigate("/");
+                navigate("/question/1");
               }}
             />
             <Button
@@ -54,8 +57,8 @@ export default function Result() {
               onClick={handleRandomClick}
             />
           </StyledButtonWrapper>
-        </StyledFooter>
-      </StyledWrapper>
+        </StyledWrapper>
+      </StyledFooter>
     </>
   );
 }

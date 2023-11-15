@@ -16,17 +16,22 @@ import SuccessCopySnackbar from "./SuccessCopySnackbar";
 const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  background-color: #ffffff;
+  height: 315px;
 `;
 
 // 버튼을 배치시키는 컨테이너
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 48px);
-  grid-column-gap: 8px;
+  grid-template-columns: repeat(4, 140px);
+  grid-column-gap: 16px;
   justify-content: center;
   align-items: center;
+  margin-top: 38px;
   margin-bottom: 16px;
+  place-items: center;
 `;
 
 // Style을 적용한 URL 버튼 컴포넌트 추가
@@ -62,6 +67,7 @@ export default function ShareButton() {
   const [successToastOpen, setSuccessToastOpen] = useState(false);
 
   const currentUrl = window.location.href;
+
   // kakao SDK import하기
   const status = useScript("https://developers.kakao.com/sdk/js/kakao.js");
 
@@ -76,9 +82,11 @@ export default function ShareButton() {
       }
     }
   }, [status]);
+
   const handleKakaoButton = () => {
     window.Kakao.Link.sendScrap({
-      requestUrl: currentUrl,
+      requestUrl:
+        "http://moheyoubucket.s3-website.ap-northeast-2.amazonaws.com/",
     });
   };
 
@@ -88,7 +96,7 @@ export default function ShareButton() {
 
   return (
     <FlexContainer>
-      <h1>공유하기</h1>
+      <h1>내 결과 공유하기</h1>
       <GridContainer>
         <FacebookShareButton url={currentUrl}>
           <FacebookIcon size={48} round={true} borderRadius={24}></FacebookIcon>

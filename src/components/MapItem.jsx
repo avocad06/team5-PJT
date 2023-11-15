@@ -20,10 +20,42 @@ export default function MapItem({ data }) {
             flexGrow: 1,
           }}
         >
-          <p>{placeName}</p>
-          <p>{roadAddressName}</p>
-          <p>{addressName}</p>
-          <p>{phone}</p>
+          <p
+            style={{
+              color: "#000000",
+              fontSize: "9px",
+              lineHeight: "15px",
+            }}
+          >
+            {placeName}
+          </p>
+          <p
+            style={{
+              color: "#000000b3",
+              fontSize: "7px",
+              lineHeight: "10px",
+            }}
+          >
+            {roadAddressName}
+          </p>
+          <p
+            style={{
+              color: "#0000006e",
+              fontSize: "7px",
+              lineHeight: "10px",
+            }}
+          >
+            {addressName}
+          </p>
+          <p
+            style={{
+              color: "#0000006e",
+              fontSize: "7px",
+              lineHeight: "10px",
+            }}
+          >
+            {phone}
+          </p>
         </div>
       </ListItem>
       <Divider />
