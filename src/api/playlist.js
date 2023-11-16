@@ -27,8 +27,9 @@ const getVideos = async (arr) => {
     }
 }
 
-/** 매개변수 query: string */
-export const searchVideoResults = async (query) => {
+/** 매개변수 query: string, oneVideo?: boolean */
+export const searchVideoResults = async (query, oneVideo) => {
+    console.log(query)
     try {
         const searchVideoRes = await request({
             method: 'GET',
@@ -44,11 +45,12 @@ export const searchVideoResults = async (query) => {
         const videoIdList = videoIdData.map((v) => v.id.videoId)
         console.log(videoIdList)
 
-        const videoData = await getVideos(videoIdList)
+        const videoData = await getVideos(oneVideo ? [videoIdList[0]] : videoIdList)
         console.log(videoData)
 
         return videoData ?? null
-    } catch {
-
+    } catch (err) {
+        console.log(err)
+        return null
     }
 }

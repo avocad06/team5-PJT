@@ -3,9 +3,27 @@ import { useNavigate, useParams } from "react-router-dom";
 import { surveyQuestions } from "../const/Question";
 import { getRandomIndex } from "../pages/Result";
 import { surveyResults } from "../const/result";
+import { useGetResultId } from "./useGetResultId";
+import { v4 as uuidv4 } from 'uuid';
+import { useGetResult } from "./useGetResult";
+import { useYoutubeQuery } from "./useYoutubeQuery";
 
 export function useSurveySelect() {
   const { questionId } = useParams();
+  const { dispatchId } = useGetResultId()
+  const { getResultQuery } = useGetResult()
+
+  const [activityQuery, setActivityQuery] = useState(null)
+
+  const apiQuery = useYoutubeQuery({
+    query: activityQuery,
+    options: {
+      enabled: !!activityQuery,
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      staleTime: 1000 * 60 * 5
+    }
+  })
 
   const SESSION_SELECTED_OPTIONS_KEY = "selectOptions";
 
@@ -37,11 +55,14 @@ export function useSurveySelect() {
     setLoading(true);
     const resultId = getResult();
     console.log(resultId);
+    dispatchId(resultId)
+    const query = getResultQuery(resultId);
+    setActivityQuery(query)
     sessionStorage.removeItem(SESSION_SELECTED_OPTIONS_KEY);
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
 
     // 페이지 이동
-    navigate(`/result/${resultId}`);
+    navigate(`/result/${uuidv4()}`);
   };
 
   function getResult() {
@@ -65,14 +86,14 @@ export function useSurveySelect() {
     const randomList =
       isOutside === character.charAt(0)
         ? surveyResults
-            .filter((result) => result.characterGroup.includes(character))
-            .map((activity) => activity.id + 1)
+          .filter((result) => result.characterGroup.includes(character))
+          .map((activity) => activity.id)
         : // 4. 일치하지 않는다면, 현재 날씨가 들어간 활동을 모아, 랜덜 리스트를 만든다.
-          surveyResults
-            .filter((result) =>
-              isOutside === "E" ? result.isOutside : !result.isOutside
-            )
-            .map((activity) => activity.id + 1);
+        surveyResults
+          .filter((result) =>
+            isOutside === "E" ? result.isOutside : !result.isOutside
+          )
+          .map((activity) => activity.id);
     // 5. 랜덤 결과를 출력한다.
     const nextResultId = getRandomIndex(randomList);
     return nextResultId;
@@ -103,20 +124,20 @@ export function useSurveySelect() {
       // 3. 있다면, 해당 객체를 수정하고, 없다면 추가하도록 구현
       const nextOptions = prevOption
         ? prevData.map((option) =>
-            option.questionId === prevOption.questionId
-              ? {
-                  ...option,
-                  selectedOption: index < 2 ? index : 1,
-                }
-              : option
-          )
-        : [
-            ...prevData,
-            {
-              questionId: parseInt(questionId),
+          option.questionId === prevOption.questionId
+            ? {
+              ...option,
               selectedOption: index < 2 ? index : 1,
-            },
-          ];
+            }
+            : option
+        )
+        : [
+          ...prevData,
+          {
+            questionId: parseInt(questionId),
+            selectedOption: index < 2 ? index : 1,
+          },
+        ];
 
       sessionStorage.setItem(
         SESSION_SELECTED_OPTIONS_KEY,

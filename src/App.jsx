@@ -4,6 +4,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import Result from "./pages/Result";
 import Main from "./pages/Main";
+import { ResultIdProvider } from "./context/ResultIdContext";
+import { QueryClient } from "@tanstack/query-core";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const GlobalStyle = createGlobalStyle`
 :root {
@@ -91,12 +95,17 @@ const router = createBrowserRouter([
     element: <Result />,
   },
 ]);
-
+const queryClient = new QueryClient();
 function App() {
   return (
     <>
       <GlobalStyle />
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <ResultIdProvider>
+          <RouterProvider router={router} />
+        </ResultIdProvider>
+        <ReactQueryDevtools />
+      </QueryClientProvider>
     </>
   );
 }

@@ -4,6 +4,7 @@ import { searchVideoResults } from "../api/playlist";
 import PlayListItem from "./playlist/PlayListItem";
 import styled from "styled-components";
 import SubText from "./SubText";
+import { useYoutubeQuery } from "../hooks/useYoutubeQuery";
 
 const StyledPlayListWrapper = styled.div`
   display: flex;
@@ -23,32 +24,22 @@ const StyledPlayList = styled.section`
 `;
 
 export default function PlayList({ multiplePlayList, query }) {
-  const [allVideoData, setAllVideoData] = useState([]);
-  const fetchSearchResult = async () => {
-    try {
-      //   const searchResponse = await axios.get("/mock/search-result.json");
-      const searchResponse = await axios.get(
-        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=${
-          import.meta.env.VITE_YOUTUBE_API_KEY
-        }`
-      );
-      console.log(searchResponse);
-    } catch (err) {}
-  };
+  const resultPlayList = useYoutubeQuery({
+    query,
+    options: {},
+  });
 
-  useEffect(() => {
-    async function fetchVideo() {
-      const videoData = await searchVideoResults(query);
-      setAllVideoData(multiplePlayList ? videoData : [videoData[0]]);
-    }
-
-    fetchVideo();
-  }, [query]);
   return (
     <StyledPlayList>
-      <SubText content={"관련 영상 추천해드려요!"} />
+      <SubText
+        content={
+          resultPlayList.data
+            ? "관련 영상 추천해드려요!"
+            : "영상을 불러올 수 없습니다."
+        }
+      />
       <StyledPlayListWrapper>
-        {allVideoData.map((video) => (
+        {resultPlayList.data?.map((video) => (
           <PlayListItem videoContent={video} key={video.id} />
         ))}
       </StyledPlayListWrapper>
