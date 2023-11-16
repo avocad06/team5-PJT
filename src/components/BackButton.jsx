@@ -16,8 +16,8 @@ export default function BackButton() {
     <StyledButton onClick={handleClickBack}>
       <div
         style={{
-          width: "28px",
-          height: "28px",
+          width: "22px",
+          height: "22px",
           borderTop: "6.2px solid #fff",
           borderRight: "6.2px solid #fff",
           transform: "rotate(-135deg)",
